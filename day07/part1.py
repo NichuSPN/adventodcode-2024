@@ -2,15 +2,17 @@ import itertools
 import tqdm
 
 # INPUT_FILE_NAME = 'example.txt'
-INPUT_FILE_NAME = 'raminput.txt'
+INPUT_FILE_NAME = 'actual.txt'
 
-input = {}
+input = []
 with open(f'input/{INPUT_FILE_NAME}', 'r') as file:
     # Read each line in the file
     for line in file:
         # Print each line
         [k, v] = line.strip().split(': ')
-        input[k]=[int(x) for x in v.split(' ')]
+        tempInput = [k]
+        tempInput.append([int(x) for x in v.split(' ')])
+        input.append(tempInput)
         
 def add(x, y): 
     return x+y
@@ -39,7 +41,7 @@ def anyEquationPresent(testValue, numbers):
     return 0
 
 totalOfValidValues = 0
-for testValue, numbers in tqdm.tqdm(input.items()):
+for [testValue, numbers] in tqdm.tqdm(input):
     totalOfValidValues+=anyEquationPresent(testValue, numbers)
     
 print(f"ta-da... Here is the sum of valid test values: {totalOfValidValues}")

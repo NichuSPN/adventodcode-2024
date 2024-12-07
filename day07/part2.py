@@ -2,15 +2,17 @@ import itertools
 import tqdm
 
 # INPUT_FILE_NAME = 'example.txt'
-INPUT_FILE_NAME = 'actual.txt'
+INPUT_FILE_NAME = 'raminput.txt'
 
-input = {}
+input = []
 with open(f'input/{INPUT_FILE_NAME}', 'r') as file:
     # Read each line in the file
     for line in file:
         # Print each line
         [k, v] = line.strip().split(': ')
-        input[k]=v.split(' ')
+        tempInput = [k]
+        tempInput.append(v.split(' '))
+        input.append(tempInput)
         
 combMap = {}
         
@@ -64,14 +66,14 @@ def anyEquationPassed(testValue, numbers, combinations):
     return 0
 
 validInIteration1 = []
-for testValue, numbers in tqdm.tqdm(input.items()):
+for [testValue, numbers] in tqdm.tqdm(input):
     combinations = getCombinations(['+', '*'], len(numbers)-1)
     if anyEquationPassed(testValue, numbers, combinations) > 0:
         validInIteration1.append(testValue)
 
 evalMemo = {}
 totalOfOtherValidValues = 0
-for testValue, numbers in tqdm.tqdm(input.items()):
+for [testValue, numbers] in tqdm.tqdm(input):
     if testValue in validInIteration1:
         continue
     combinations = getCombinations(['+', '*', '|'], len(numbers)-1, True)
