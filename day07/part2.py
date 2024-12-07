@@ -2,7 +2,7 @@ import itertools
 import tqdm
 
 # INPUT_FILE_NAME = 'example.txt'
-INPUT_FILE_NAME = 'raminput.txt'
+INPUT_FILE_NAME = 'actual.txt'
 
 input = []
 with open(f'input/{INPUT_FILE_NAME}', 'r') as file:
